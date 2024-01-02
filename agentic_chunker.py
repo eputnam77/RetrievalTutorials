@@ -1,7 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 import uuid
 from langchain.chat_models import ChatOpenAI
-from langchain.schema.messages import HumanMessage
 import os
 from typing import Optional
 from langchain_core.pydantic_v1 import BaseModel
@@ -14,7 +13,9 @@ class AgenticChunker:
     def __init__(self, openai_api_key=None):
         self.chunks = {}
         self.id_truncate_limit = 5
-        self.generate_new_metadata_ind = True # Whether or not to update summaries and titles as you get new information
+
+        # Whether or not to update/refine summaries and titles as you get new information
+        self.generate_new_metadata_ind = True
         self.print_logging = True
 
         if openai_api_key is None:
@@ -358,7 +359,7 @@ if __name__ == "__main__":
         # 'The same pattern of superlinear returns is observed in knowledge.',
         # 'The same pattern of superlinear returns is observed in benefit to humanity.',
         # 'In fame, power, military victories, knowledge, and benefit to humanity, the rich get richer.'
-        ]
+    ]
     
     ac.add_propositions(propositions)
     ac.pretty_print_chunks()
